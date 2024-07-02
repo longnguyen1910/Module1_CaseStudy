@@ -1,7 +1,7 @@
 let board = [];
 let rows = 8;
 let columns = 8;
-let minesCount = 5;
+let minesCount = 10;
 let minesLocation = [];
 let tilesClicked = 0;
 let flagEnabled = false;
@@ -13,11 +13,23 @@ window.onload = function () {
 }
 
 function setMines() {
-    minesLocation.push("2-2");
-    minesLocation.push("2-4");
-    minesLocation.push("3-5");
-    minesLocation.push("5-6");
-    minesLocation.push("7-7");
+    // minesLocation.push("2-2");
+    // minesLocation.push("2-4");
+    // minesLocation.push("3-5");
+    // minesLocation.push("5-6");
+    // minesLocation.push("7-7");
+    let minesLeft = minesCount;
+    while (minesLeft > 0) { 
+        let r = Math.floor(Math.random() * rows);
+        let c = Math.floor(Math.random() * columns);
+        let id = r.toString() + "-" + c.toString();
+
+        if (!minesLocation.includes(id)) {
+            minesLocation.push(id);
+            minesLeft -= 1;
+        }
+    }
+
 }
 
 function startGame() {
@@ -146,4 +158,8 @@ function checkTile(r, c) {
         return 1;
     }
     return 0;
+}
+
+function playAgain(){
+    location.reload();
 }
